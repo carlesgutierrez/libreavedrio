@@ -121,7 +121,7 @@ Si al intentar desplegar recibes un error de permisos, asegúrate de estar logue
 ### 👨‍💻 Créditos y Autoría
 
 - **Creador**: [Carles Gutierrez](https://www.linkedin.com/in/carlesgutierrez)
-- **Desarrollo IA**: Este proyecto ha sido desarrollado en colaboración con **Antigravity**, utilizando modelos de IA avanzados como **Gemini 2.0 Flash**.
+- **Desarrollo IA**: Este proyecto ha sido desarrollado en colaboración con **Antigravity**, utilizando modelos de IA avanzados como **Gemini 3 Flash**.
 
 ### 📄 Licencia
 
