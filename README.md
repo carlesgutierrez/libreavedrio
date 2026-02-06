@@ -1,7 +1,7 @@
 # Libreavedrio - Granja Avícola Ecológica
 
 <div align="center">
-  <img src="./capturas/captura1.png" alt="Libreavedrio Web Preview" width="600">
+  <img src="./capturas/captura1.png" alt="Libreavedrio Web Preview" width="100%">
 </div>
 
 Este proyecto es la página web oficial de **Libreavedrio**, una granja avícola ecológica situada en la Sierra Norte de Madrid. La web está diseñada para ser una landing page moderna, responsive y fácil de configurar, que refleja los valores de sostenibilidad y bienestar animal de la granja.
