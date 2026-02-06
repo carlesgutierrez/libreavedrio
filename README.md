@@ -109,6 +109,7 @@ Si al intentar desplegar recibes un error de permisos, asegúrate de estar logue
 1. Instala GitHub CLI: `brew install gh`
 2. Autentícate: `gh auth login` (Elige protocolo **HTTPS** y **Yes** para autenticar Git).
 3. Asegúrate de que el remoto sea el correcto: `git remote set-url origin https://github.com/carlesgutierrez/libreavedrio.git`
+4. Configura Git para usar la autenticación de CLI: `gh auth setup-git`
 
 ### 🔄 Flujo de Trabajo Recomendado
 

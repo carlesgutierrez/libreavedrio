@@ -44,6 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.classList.add('active');
             }
         });
+
+        // UPDATE URL HASH ON SCROLL
+        if (currentSectionId) {
+            if (window.location.hash !== '#' + currentSectionId) {
+                history.replaceState(null, null, '#' + currentSectionId);
+            }
+        } else {
+            // If no section is active, check if we are at the top (above first section)
+            if (sections.length > 0 && scrollY < (sections[0].offsetTop - dynamicOffset)) {
+                if (window.location.hash) {
+                    history.replaceState(null, null, window.location.pathname + window.location.search);
+                }
+            }
+        }
     }
 
     window.addEventListener('scroll', highlightNav);
