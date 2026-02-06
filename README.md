@@ -117,4 +117,15 @@ Si al intentar desplegar recibes un error de permisos, asegúrate de estar logue
 
 
 ---
+
+### 👨‍💻 Créditos y Autoría
+
+- **Creador**: [Carles Gutierrez](https://www.linkedin.com/in/carlesgutierrez)
+- **Desarrollo IA**: Este proyecto ha sido desarrollado en colaboración con **Antigravity**, utilizando modelos de IA avanzados como **Gemini 2.0 Flash**.
+
+### 📄 Licencia
+
+Este proyecto está bajo la Licencia **MIT**. Consulta el archivo `LICENSE` (si existe) para más detalles o siéntete libre de usar el código bajo estos términos.
+
+---
 Diseñado y desarrollado para representar la esencia de la agricultura ecológica y el respeto animal.
