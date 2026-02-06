@@ -1,0 +1,908 @@
+@import './config.css';
+
+/* Reset and basic styles already use the variables from root in config.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth mobile scroll */
+}
+
+/* Body styles - Clean and readable */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  /* Fix for intermittent horizontal lines (Chrome rendering artifact) */
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-marker);
+  margin-bottom: var(--spacing-element);
+}
+
+h2 {
+  font-size: 3.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: var(--spacing-gap-medium);
+  letter-spacing: -1px;
+  line-height: 0.9;
+  text-shadow: 4px 4px 0 var(--color-accent);
+}
+
+.container {
+  max-width: var(--width-container);
+  margin: 0 auto;
+  padding: 0 var(--spacing-container);
+}
+
+/* 1. HERO SECTION */
+.hero-intro {
+  position: relative;
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 60px;
+  /* Room for the overlapping nav */
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  text-align: center;
+  z-index: 10;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--width-logo-wrapper);
+  max-width: 95%;
+}
+
+.main-logo-graphic {
+  width: var(--width-logo-graphic);
+  max-width: 100%;
+  aspect-ratio: 1118 / 295;
+  height: auto;
+  display: block;
+}
+
+/* Logo Subtitle Appearance - Cleaned up */
+.logo-subtitle {
+  width: var(--logo-subtitle-width);
+  max-width: var(--logo-subtitle-max-width);
+  margin-top: 20px;
+  font-family: var(--font-heading);
+  font-weight: var(--logo-subtitle-font-weight);
+  font-style: var(--logo-subtitle-font-style);
+  font-size: var(--logo-subtitle-font-size);
+  letter-spacing: var(--logo-subtitle-letter-spacing);
+  color: white;
+  background: var(--color-marker);
+  padding: 0.8rem 1.5rem;
+  text-align: center;
+  line-height: 1.4;
+  box-shadow: 6px 6px 0 var(--color-accent);
+}
+
+/* 2. STICKY NAV */
+.sticky-nav {
+  position: sticky;
+  /* Visual top when sticky will be: top + margin-top */
+  /* We want visual top = var(--nav-sticky-top), so top = nav-sticky-top + (header-height/2) */
+  top: calc(var(--nav-sticky-top) + (var(--header-height) / 2));
+  width: calc(100% - 40px);
+  margin: calc(var(--header-height) / -2 + var(--nav-position-offset)) 20px 0 20px;
+  height: var(--header-height);
+  /* Fixed height for stability */
+  display: flex;
+  align-items: center;
+  background-color: var(--color-nav-bg);
+  z-index: 1000;
+  border: 4px solid var(--color-marker);
+  box-shadow: var(--shadow-bold);
+  /* The Secret Sauce for smooth rotated borders: */
+  outline: 1px solid transparent;
+  transform: perspective(1000px) rotate(var(--rot-slight)) translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  /* More compact padding */
+}
+
+.main-menu {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-item {
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  color: var(--color-text);
+  font-size: 1rem;
+  /* Smaller font */
+  padding: 0.35rem 1rem;
+  /* Tighter padding */
+  transition: color var(--nav-transition-speed) ease, transform var(--nav-transition-speed) ease, text-decoration var(--nav-transition-speed) ease;
+  text-transform: uppercase;
+  border: none;
+}
+
+/* Hover and Active states identical */
+.nav-item:hover,
+.nav-item.active {
+  color: var(--color-marker);
+  /* Maroon on hover */
+  text-decoration: line-through;
+  transform: scale(1.1) rotate(-2deg);
+}
+
+
+/* 4. CONTENT SECTIONS */
+/* 4. CONTENT SECTIONS */
+.content-section {
+  padding: var(--spacing-section) 0;
+  position: relative;
+  z-index: 1;
+  /* Force a new rendering context to avoid subpixel gaps */
+  transform: translateZ(0);
+}
+
+.alt-bg {
+  background-color: var(--color-bg-alt);
+  /* Very light orange tint */
+  margin-top: -1px;
+  /* Overlap to hide subpixel gaps */
+  padding-top: calc(var(--spacing-section) + 1px);
+}
+
+/* Granja Section Grid */
+.granja-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--spacing-gap-large);
+  align-items: center;
+}
+
+.granja-visuals {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Polaroid Style */
+.polaroid-wrapper {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  transform: rotate(-3deg);
+  transition: transform 0.3s ease;
+}
+
+.polaroid-wrapper:hover {
+  transform: rotate(0deg) scale(1.02);
+  z-index: 10;
+}
+
+.polaroid-frame {
+  background: #fff;
+  padding: 15px 15px 60px 15px;
+  /* Bottom padding for caption */
+  box-shadow: 0 10px 20px rgba(var(--shadow-color), var(--shadow-opacity)), 0 2px 6px rgba(var(--shadow-color), calc(var(--shadow-opacity) * 0.5));
+  position: relative;
+}
+
+.polaroid-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* Square crop */
+  overflow: hidden;
+  position: relative;
+  background: #eee;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.polaroid-img.active {
+  opacity: 1;
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  padding-top: 15px;
+  text-align: center;
+  font-family: 'Indie Flower', cursive, var(--font-heading);
+  /* Scribble font look */
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Masking Tape Effect */
+.tape-corner {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background-color: rgba(255, 248, 220, 0.6);
+  /* Beige semi-transparent */
+  box-shadow: 0 1px 2px rgba(var(--shadow-color), var(--shadow-opacity));
+  z-index: 20;
+  opacity: 0.9;
+  backdrop-filter: blur(1px);
+}
+
+.tape-corner.top-left {
+  top: -10px;
+  left: -30px;
+  transform: rotate(-35deg);
+}
+
+.tape-corner.bottom-right {
+  bottom: -10px;
+  right: -30px;
+  transform: rotate(-35deg);
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+  .granja-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .granja-visuals {
+    margin-bottom: 2rem;
+  }
+}
+
+.text-block p {
+  margin-bottom: 1rem;
+  /* Restore spacing for readability inside grid */
+}
+
+.text-block p+p {
+  margin-top: 0;
+}
+
+.housing-container {
+  margin: var(--spacing-gap-medium) 0;
+  padding: 0;
+  text-align: left;
+}
+
+.housing-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+/* Features Notes Grid - Anarchic Style */
+.features-notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  padding: 2rem 0;
+}
+
+/* Feature Note Flip Card System */
+.feature-note-container {
+  perspective: 1000px;
+  min-height: 400px;
+  /* Ensure consistent height for flipping */
+  transform: rotate(var(--note-rot, 0deg));
+  transition: transform 0.3s ease;
+}
+
+.feature-note-container:hover {
+  transform: rotate(0deg) scale(1.02);
+  z-index: 10;
+}
+
+.feature-note-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  /* Clean mobile touch */
+}
+
+.feature-note-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.feature-note-front,
+.feature-note-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border: 4px solid var(--color-marker);
+  box-shadow: var(--shadow-bold);
+  padding: var(--note-padding-top) 2rem 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #ffffff;
+  /* Solid White for both */
+  color: var(--color-text);
+  /* Charcoal for both */
+  /* Remove overflow: hidden to allow icons to bleed out */
+}
+
+.feature-note-front {
+  font-family: var(--note-font-front);
+  z-index: 2;
+  transform: rotateY(0deg) translateZ(1px);
+  /* Force hardware layer */
+}
+
+.feature-note-back {
+  font-family: var(--note-font-back);
+  transform: rotateY(180deg) translateZ(1px);
+  /* Force hardware layer */
+  justify-content: center;
+  /* Vertical alignment */
+  align-items: center;
+  /* Horizontal alignment */
+  text-align: center;
+  z-index: 1;
+}
+
+.feature-note-back h3 {
+  margin-bottom: 0.5rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feature-note-front h3,
+.feature-note-back h3 {
+  font-size: 1.6rem;
+  /* Slightly smaller default */
+  font-weight: 900;
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 3px solid var(--color-marker);
+  padding-bottom: 0.3rem;
+  line-height: var(--note-title-line-height);
+}
+
+.feature-note-front p,
+.feature-note-back p {
+  font-size: var(--note-font-size);
+  line-height: var(--note-text-line-height);
+  margin: 0;
+}
+
+/* Flip Hint Icon */
+.flip-hint {
+  position: absolute;
+  bottom: 0.8rem;
+  right: 0.8rem;
+  width: 32px;
+  /* Slightly larger */
+  height: 32px;
+  opacity: 0.15;
+  /* Even more subtle default */
+  color: #000;
+  /* Reverted to black as requested */
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(-15deg);
+  /* Anarchic tilted position */
+}
+
+/* Highlight when card is hovered (Desktop & Mobile) */
+.feature-note-inner:hover .flip-hint {
+  opacity: 0.8;
+  transform: rotate(0deg) scale(1.1);
+}
+
+/* Specific highlight for mobile UX when centered (JS triggered) */
+@media (max-width: 768px) {
+  .flip-hint {
+    opacity: 0.3;
+    /* A bit more visible on mobile by default */
+  }
+
+  .feature-note-inner.is-centered .flip-hint {
+    opacity: 0.8;
+    transform: rotate(0deg) scale(1.1);
+  }
+}
+
+.price-details ul {
+  list-style: none;
+  padding: 0.5rem 0;
+  /* Reduced padding */
+}
+
+.price-details li {
+  font-size: 1rem;
+  /* Compact font */
+  margin-bottom: 0.2rem;
+  color: var(--color-text);
+  padding: 0.15rem 0;
+  border-bottom: 1px solid rgba(var(--shadow-color), 0.05);
+}
+
+.price-details li strong {
+  color: var(--color-marker);
+}
+
+.price-details p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.price-footer {
+  margin-top: 0.5rem;
+  /* Group tightly */
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(var(--shadow-color), 0.1);
+  padding-top: 0.5rem;
+}
+
+.emoji-icon {
+  font-size: 4.5rem;
+  /* Increased size */
+  position: absolute;
+  top: -35px;
+  /* More overlap */
+  right: -25px;
+  /* More overlap */
+  filter: drop-shadow(4px 4px 0px rgba(var(--shadow-color), calc(var(--shadow-opacity) * 2)));
+  transform: rotate(15deg);
+  z-index: 5;
+  pointer-events: none;
+  /* Icon shouldn't capture clicks */
+}
+
+/* Map Section Styles */
+.map-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-gap-medium);
+  /* Or use another var if appropriate */
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.map-info {
+  text-align: left;
+}
+
+.map-info p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.location-details {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.location-details li {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.map-image-sketch {
+  width: 100%;
+  height: auto;
+  border: 3px solid var(--color-marker);
+  border-radius: 8px;
+  box-shadow: 10px 10px 0 rgba(var(--shadow-color), calc(var(--shadow-opacity) * 0.3));
+}
+
+.btn-maps {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--color-marker);
+  color: white;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  border-radius: 4px;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.btn-maps:hover {
+  background-color: var(--color-accent);
+}
+
+@media (max-width: 768px) {
+  .map-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .map-info {
+    text-align: center;
+  }
+}
+
+/* Contact Form */
+.contact-container {
+  max-width: 800px;
+  text-align: center;
+}
+
+.intro-contact {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.form-wrapper {
+  background: white;
+  padding: 2rem;
+  border: 3px solid var(--color-marker);
+  border-radius: 10px;
+  /* Rough sketch look could involve rotation or SVG border, sticking to clean solid border for form for now */
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-marker);
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--color-marker);
+  border-radius: 5px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background-color: var(--color-bg);
+  transition: all 0.2s ease;
+  cursor: text;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 4px 4px 0 var(--color-marker);
+  transform: translate(-2px, -2px);
+}
+
+.checkbox-group {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-top: -0.5rem;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 4px;
+  /* Align with first line of text */
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+.checkbox-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: none !important;
+  margin-bottom: 0 !important;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.checkbox-label a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.btn-submit {
+  background-color: var(--color-marker);
+  color: white;
+  border: 2px solid var(--color-marker);
+  padding: 1rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  background-color: var(--color-accent);
+  color: white;
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(var(--shadow-color), var(--shadow-opacity));
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+.form-success-container {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.emoji-success {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.form-success-container h3 {
+  color: #166534;
+  margin-bottom: 0.5rem;
+}
+
+.form-success-container p {
+  margin-bottom: 2rem;
+  color: var(--color-text);
+}
+
+.btn-reset {
+  background: transparent;
+  color: var(--color-marker);
+  border: 2px solid var(--color-marker);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  border-radius: 5px;
+}
+
+.btn-reset:hover {
+  background-color: var(--color-secondary);
+  transform: scale(1.05);
+}
+
+.form-status.error {
+  display: block;
+  padding: 1rem;
+  margin-top: 1rem;
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 2px solid #991b1b;
+  border-radius: 5px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Footer */
+.main-footer {
+  text-align: center;
+  padding: 3rem 0;
+  margin-top: 2rem;
+  border-top: none;
+}
+
+.footer-legal {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+.footer-logo-small {
+  height: 60px;
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-logo-small:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Bezier Separators */
+/* Bezier Separators */
+.bezier-separator {
+  width: 100%;
+  height: 80px;
+  overflow: hidden;
+  margin: 0;
+  /* Remove gaps */
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  /* Default: White to White */
+  background-color: var(--color-bg);
+}
+
+.bezier-separator.to-alt {
+  background-color: var(--color-bg);
+  /* Section above is white */
+}
+
+.bezier-separator.to-alt .separator-fill {
+  fill: var(--color-bg-alt);
+  /* Section below is beige */
+}
+
+.bezier-separator.from-alt {
+  background-color: var(--color-bg-alt);
+  /* Section above is beige */
+}
+
+.bezier-separator.from-alt .separator-fill {
+  fill: var(--color-bg);
+  /* Section below is white */
+}
+
+.bezier-separator svg {
+  width: 100%;
+  height: 102%;
+  /* Slight overlap to avoid line rendering artifacts */
+  display: block;
+}
+
+.bezier-separator .separator-fill {
+  stroke: none;
+}
+
+.bezier-separator .separator-stroke {
+  fill: var(--color-marker);
+  stroke: var(--color-marker);
+  stroke-width: 1px;
+}
+
+@media (max-width: 768px) {
+  .hero-intro {
+    height: 70vh;
+  }
+
+  .main-logo-graphic {
+    width: 90%;
+  }
+
+  .logo-subtitle {
+    /* Scale proportionally based on the config variable */
+    font-size: calc(var(--logo-subtitle-font-size) * 0.85);
+    white-space: normal;
+    /* Allow wrap on very small screens if necessary */
+    width: 95%;
+    max-width: 95vw;
+  }
+
+  .sticky-nav {
+    position: var(--nav-mobile-sticky-type);
+    height: auto;
+    /* Allow growth for column layout on mobile */
+    min-height: unset;
+    cursor: default;
+    /* Center it initially */
+    margin: calc(var(--header-height) / -2 + var(--nav-position-offset)) 5% 0 5%;
+    width: 90%;
+    top: calc(var(--header-height) / 2 - var(--nav-position-offset));
+    transform: rotate(var(--rot-slight));
+    z-index: 1001;
+    transition: none;
+    /* Prevent browser transition on resize */
+  }
+
+  .nav-container {
+    padding: 0.8rem 0;
+    /* Tighter mobile padding */
+  }
+
+  .main-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .content-section {
+    scroll-margin-top: 180px;
+    /* Reduced for the more compact header */
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
