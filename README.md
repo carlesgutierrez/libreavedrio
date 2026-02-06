@@ -1,5 +1,9 @@
 # Libreavedrio - Granja Avícola Ecológica
 
+<div align="center">
+  <img src="./public/images/screenshot.png" alt="Libreavedrio Web Preview" width="600">
+</div>
+
 Este proyecto es la página web oficial de **Libreavedrio**, una granja avícola ecológica situada en la Sierra Norte de Madrid. La web está diseñada para ser una landing page moderna, responsive y fácil de configurar, que refleja los valores de sostenibilidad y bienestar animal de la granja.
 
 ## 📁 Estructura del Proyecto
@@ -20,34 +24,35 @@ El archivo `src/config.css` funciona como el **panel de control visual** de la w
 ### Propiedades Disponibles:
 
 #### 🎨 Colores
--   `--color-bg`: Color de fondo principal (crema suave).
--   `--color-text`: Color de texto principal (gris oscuro/negro).
--   `--color-marker`: Color para elementos decorativos tipo "rotulador".
--   `--color-accent`: Color de acento (naranja tierra).
--   `--color-secondary`: Color de fondo secundario para secciones alternas.
+-   `--color-bg`: Color de fondo principal (Gris suave).
+-   `--color-bg-alt`: Color de fondo alternativo (Beige suave para secciones).
+-   `--color-text`: Color de texto principal (Charcoal Black).
+-   `--color-marker`: Color para elementos decorativos y marcadores (Maroon).
+-   `--color-accent`: Color de acento (Terracotta Orange).
+-   `--color-secondary`: Color secundario (usado para contrastes fuertes).
 -   `--color-nav-bg`: Fondo de la barra de navegación.
 
 #### 🖋️ Tipografía
 -   `--font-heading`: Fuente utilizada para títulos (`Montserrat`).
 -   `--font-body`: Fuente utilizada para el cuerpo de texto (`Open Sans`).
 
+#### 📐 Elementos "Anarquica" (Acento visual)
+-   `--rot-slight`, `--rot-bold`, `--rot-chaos`: Controlan las rotaciones de los elementos para dar ese efecto "desordenado" pero estético.
+-   `--shadow-bold`: Sombras sólidas para tarjetas y botones.
+
 #### 📏 Espaciado y Dimensiones
 -   `--spacing-section`: Espaciado vertical entre secciones.
 -   `--spacing-container`: Margen lateral interno de los contenedores.
 -   `--width-container`: Ancho máximo del contenido (1000px).
--   `--header-height`: Altura fija del header para cálculos de posicionamiento.
-
-#### 🏷️ Logo y Elementos Específicos
--   `--width-logo-wrapper`: Controla el tamaño del contenedor del logo en la sección Hero.
--   `--logo-subtitle-letter-spacing`: Ajusta el espaciado entre letras del subtítulo del logo para alineación perfecta.
--   `--bezier-stroke-width`: Grosor de las líneas curvas (separadores bezier) entre secciones.
+-   `--header-height`: Altura fija del header.
+-   `--bezier-stroke-width`: Grosor de las líneas curvas separadoras.
 
 #### 🖱️ Interacción y Scroll
--   `--scroll-offset`: Margen superior que se deja al saltar a una sección mediante el menú, evitando que el header tape el título.
+-   `--scroll-offset`: Margen superior al saltar a una sección (140px por defecto).
 
 ## 🚀 Desarrollo
 
-Para ejecutar el proyecto localmente, asegúrate de tener instalado Node.js y sigue estos pasos:
+Para ejecutar el proyecto localmente:
 
 1.  Instala las dependencias:
     ```bash
@@ -57,25 +62,59 @@ Para ejecutar el proyecto localmente, asegúrate de tener instalado Node.js y si
     ```bash
     npm run dev
     ```
-3.  Para construir el proyecto para producción:
-    ```bash
-    npm run build
-    ```
 
 ## 🌐 Despliegue en GitHub Pages
 
-Este proyecto está configurado para desplegarse automáticamente en GitHub Pages mediante **GitHub Actions**.
+Este proyecto utiliza el paquete `gh-pages` para desplegar la versión compilada.
 
-### Pasos para activar el despliegue:
+### Configuración Inicial (Solo si empiezas de cero)
 
-1.  **Sube los cambios a GitHub**: Asegúrate de que los archivos `.github/workflows/deploy.yml` y `vite.config.js` están en tu repositorio.
-2.  **Configura el Repositorio**:
-    -   Ve a la pestaña **Settings** (Ajustes) de tu repositorio en GitHub.
-    -   En el menú lateral izquierdo, haz clic en **Pages**.
-    -   En la sección **Build and deployment > Source**, selecciona **GitHub Actions** en el desplegable.
-3.  **¡Listo!**: A partir de ahora, cada vez que hagas un `git push` a la rama `main`, la web se compilará y desplegará automáticamente.
+1. **Instalar el paquete**:
+   ```bash
+   npm install --save-dev gh-pages
+   ```
 
-La URL de tu web será algo como: `https://datoscarlesgutierrez-stack.github.io/libreavedriov1/`
+2. **Scripts en `package.json`**:
+   ```json
+   "scripts": {
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d dist"
+   }
+   ```
+2. **Vite Config (`vite.config.js`)**:
+   Asegúrate de que el `base` coincide con el nombre de tu repositorio:
+   ```javascript
+   export default defineConfig({
+     base: '/libreavedrio/',
+   })
+   ```
+
+### 🚀 Cómo Desplegar Cambios
+
+Para actualizar la web con tus últimos cambios locales, simplemente ejecuta:
+
+```bash
+npm run deploy
+```
+
+Este comando automáticamente:
+1. Compila el proyecto (`npm run build`).
+2. Crea/actualiza una rama invisible llamada `gh-pages` con los archivos de la carpeta `dist`.
+3. Sube esa rama a GitHub.
+
+### 🔑 Solución a problemas de Permisos (403 Forbidden)
+
+Si al intentar desplegar recibes un error de permisos, asegúrate de estar logueado con la cuenta correcta en tu terminal usando **GitHub CLI**:
+
+1. Instala GitHub CLI: `brew install gh`
+2. Autentícate: `gh auth login` (Elige protocolo **HTTPS** y **Yes** para autenticar Git).
+3. Asegúrate de que el remoto sea el correcto: `git remote set-url origin https://github.com/carlesgutierrez/libreavedrio.git`
+
+### 🔄 Flujo de Trabajo Recomendado
+
+- **Guardar Código Fuente**: `git push origin main` (Esto guarda tus archivos de desarrollo).
+- **Actualizar Web Pública**: `npm run deploy` (Esto publica los cambios para que el mundo los vea).
+
 
 ---
 Diseñado y desarrollado para representar la esencia de la agricultura ecológica y el respeto animal.
